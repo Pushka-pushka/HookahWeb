@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using RclubHook.Areas.Admin.Controllers;
 using RclubHook.Domain.Repositories;
 using RclubHook.Domain.Repositories.Abstract;
 using RclubHook.Domain.Repositories.Repositories.EF;
@@ -24,6 +25,8 @@ builder.Services.AddTransient<IServiceItemRepository, ServiceItemRepository>();
 builder.Services.AddTransient<IEventItemRepository, EventItemRepository>();
 builder.Services.AddTransient<IPromoItemRepository, PromoItemRepository>();
 builder.Services.AddTransient<DataManager>();
+
+builder.Services.AddScoped<ILogger<ServiceItemsController>, Logger<ServiceItemsController>>();
 
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>

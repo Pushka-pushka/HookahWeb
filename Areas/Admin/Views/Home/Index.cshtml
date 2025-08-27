@@ -1,11 +1,14 @@
 @using RclubHook.Domain.Entities
-@model IQueryable<RclubHook.Domain.Entities.ServiceItem>
+@using RclubHook.Areas.Admin.ViewModel
+@model AdminPanelViewModel
+
+
 @{
     string strTitle = "Панель администратора";
     ViewBag.Title = strTitle;
 }
 
-<div>
+<div class="container">
     <h1>@strTitle</h1>
     <div>
         <div class="div-box">
@@ -14,10 +17,10 @@
             <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit">Добавить услугу</a>
         </div>
         
-        @if (Model.Any())
+        @if (Model.ServiceItems.Any())
         {
             <div>
-                @foreach (ServiceItem entity in Model)
+                @foreach (ServiceItem entity in Model.ServiceItems)
                 {
                     <div>
                         <!-- ИСПРАВЛЕНО: правильные атрибуты -->
@@ -36,13 +39,78 @@
             </div>
         }
     </div>
+    
+    
+    <div>
+        <div class="div-box">
+            <h3>Наши акции</h3>
+            <!-- ИСПРАВЛЕНО: убраны конфликтующие атрибуты -->
+            <a asp-area="Admin" asp-controller="PromoItems" asp-action="Edit">Добавить акцию</a>
+        </div>
+        
+        @if (Model.PromoItems.Any())
+        {
+            <div>
+                @foreach (PromoItem entity in Model.PromoItems)
+                {
+                    <div>
+                        <!-- ИСПРАВЛЕНО: правильные атрибуты -->
+                        <a asp-area="Admin" asp-controller="PromoItems" asp-action="Edit" asp-route-id="@entity.Id">редактировать</a>
+                        
+                        <form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="PromoItems" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.Id"/>
+                            <a href="#" onclick="document.getElementById('form-@entity.Id').submit();">удалить</a>
+                        </form>
+                        
+                        <a asp-area="" asp-controller="Promo" asp-action="Index" asp-route-id="@entity.Id">
+                            @($"{entity.Title}")
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    
+    <div>
+        <div class="div-box">
+            <h3>Наши мероприятия</h3>
+            <!-- ИСПРАВЛЕНО: убраны конфликтующие атрибуты -->
+            <a asp-area="Admin" asp-controller="PromoItems" asp-action="Edit">Добавить мероприятие</a>
+        </div>
+        
+        @if (Model.EventItems.Any())
+        {
+            <div>
+                @foreach (EventItem entity in Model.EventItems)
+                {
+                    <div>
+                        <!-- ИСПРАВЛЕНО: правильные атрибуты -->
+                        <a asp-area="Admin" asp-controller="EventItems" asp-action="Edit" asp-route-id="@entity.Id">редактировать</a>
+                        
+                        <form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="PromoItems" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.Id"/>
+                            <a href="#" onclick="document.getElementById('form-@entity.Id').submit();">удалить</a>
+                        </form>
+                        
+                        <a asp-area="" asp-controller="Promo" asp-action="Index" asp-route-id="@entity.Id">
+                            @($"{entity.Title}")
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
 
     <div class="div-box">
         <h3>Редактировать страницы сайта</h3>
         <!-- ИСПРАВЛЕНО: убраны лишние атрибуты -->
         <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageIndex">Главная</a>
-        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageServices">Наши услуги</a>
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PagePromo">Акции</a>
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageAbout">О нас</a>
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageEvents">Мероприятия</a>
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageServices">Услуги</a>
         <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageContacts">Контакты</a>
+        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageBooking">Бронь столика</a>
     </div>
 
     <div class="div-box">

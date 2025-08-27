@@ -33,6 +33,8 @@ public class EventItemRepository: IEventItemRepository
         {
             _context.Entry(entity).State = EntityState.Modified;
         }
+
+        _context.SaveChanges();
     }
 
     public void DeleteEventItem(Guid id)

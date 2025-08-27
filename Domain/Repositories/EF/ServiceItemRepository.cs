@@ -33,6 +33,8 @@ public class ServiceItemRepository: IServiceItemRepository
         {
             _context.Entry(entity).State = EntityState.Modified;
         }
+
+        _context.SaveChanges();
     }
 
     public void DeleteServiceItem(Guid id)

@@ -1,0 +1,130 @@
+@model TextField
+
+@{
+    ViewBag.Title = "Редактировать запись";
+    Layout = "_Layout";
+}
+
+<!-- Подключение CKEditor 5 через CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+
+<div>
+    <h1>@ViewBag.Title</h1>
+    <div>
+        <form asp-area="Admin" asp-controller="TextFields" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" asp-for="DateAdded"/>
+            <input type="hidden" asp-for="CodeWord"/>
+            
+            <div asp-validation-summary="All"></div>
+            
+            <div class="div-box">
+                <label asp-for="Title"></label>
+                <input asp-for="Title"/>
+                <span asp-validation-for="Title"></span>
+            </div>
+            
+            <div class="div-box">
+                <label asp-for="Text"></label>
+                <textarea asp-for="Text" id="text-editor"></textarea>
+                <span asp-validation-for="Text"></span>
+            </div>
+            
+            <div class="div-box">
+                <label asp-for="MetaTitle"></label>
+                <input asp-for="MetaTitle"/>
+                <span asp-validation-for="MetaTitle"></span>
+            </div>
+            
+            <div class="div-box">
+                <label asp-for="MetaDescription"></label>
+                <input asp-for="MetaDescription"/>
+                <span asp-validation-for="MetaDescription"></span>
+            </div>
+            
+            <div class="div-box">
+                <label asp-for="MetaKeywords"></label>
+                <input asp-for="MetaKeywords"/>
+                <span asp-validation-for="MetaKeywords"></span>
+            </div>
+            
+            <input type="submit" value="Сохранить"/>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        ClassicEditor
+            .create(document.querySelector('#text-editor'), {
+                // Конфигурация CKEditor 5
+                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+                    ]
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>
+
+
+@* @model RclubHook.Domain.Entities.TextField *@
+@* *@
+@* @{ *@
+@*     ViewBag.Title = "Редактировать запись"; *@
+@*     Layout = "_Layout"; *@
+@* } *@
+@* <script src="~/js/ckeditor5/ckeditor5.js"></script> *@
+@* *@
+@* <div> *@
+@*     <h1>@ViewBag.Title</h1> *@
+@*     <div> *@
+@*         <form asp-area="Admin" aria-controller="TextFields" asp-action="Edit" method="post" enctype="multipart/form-data"> *@
+@*             <input type="hidden" asp-for="Id"/> *@
+@*             <input type="hidden" asp-for="DateAdded"/> *@
+@*             <input type="hidden" asp-for="CodeWord"/> *@
+@*              *@
+@*             <div asp-validation-summary="All"></div> *@
+@*             <div class="div-box"> *@
+@*                 <label asp-for="Title"></label> *@
+@*                 <input asp-for="Title"/> *@
+@*                 <span asp-validation-for="Title"></span> *@
+@*             </div> *@
+@*             <div class="div-box"> *@
+@*                 <label asp-for="Text"></label> *@
+@*                 <input asp-for="Text"/> *@
+@*                 <span asp-validation-for="Text"></span> *@
+@*             </div> *@
+@*             <div class="div-box"> *@
+@*                 <label asp-for="MetaTitle"></label> *@
+@*                 <input asp-for="MetaTitle"/> *@
+@*                 <span asp-validation-for="MetaTitle"></span> *@
+@*             </div> *@
+@*             <div class="div-box"> *@
+@*                 <label asp-for="MetaDescription"></label> *@
+@*                 <input asp-for="MetaDescription"/> *@
+@*                 <span asp-validation-for="MetaDescription"></span> *@
+@*             </div> *@
+@*             <div class="div-box"> *@
+@*                 <label asp-for="MetaKeywords"></label> *@
+@*                 <input asp-for="MetaKeywords"/> *@
+@*                 <span asp-validation-for="MetaKeyWords"></span> *@
+@*             </div> *@
+@*             <input type="submit" value="Сохранить"/> *@
+@* *@
+@*         </form> *@
+@*     </div> *@
+@* </div> *@
+@* *@
+@* <script> *@
+@*     window.onload =function(){ *@
+@*         var newCkEdit = CKEDITOR.Replace('@Html.IdFor(x=>x.Text)') *@
+@*         newCkEdit.updateElement(); *@
+@*     } *@
+@* </script> *@

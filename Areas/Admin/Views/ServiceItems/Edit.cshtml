@@ -1,0 +1,107 @@
+@model ServiceItem
+
+@{
+    ViewBag.Title = "редактировать услуги";
+    Layout = "_Layout";
+}
+
+<!-- Подключение CKEditor 5 (рекомендуется) -->
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+
+< <div class="container">>
+    <h1>@ViewBag.Title</h1>
+    <div>
+        <form asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" asp-for="DateAdded"/>
+            <input type="hidden" asp-for="TitleImagePath"/>
+            
+            <div asp-validation-summary="All"></div>
+                <div class="div-box">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title"/>
+                    <span asp-validation-for="Title"></span>
+                </div>
+                
+                <div class="div-box">
+                    <label asp-for="Subtitle"></label>
+                    <input asp-for="Subtitle"/>
+                    <span asp-validation-for="Subtitle"></span>
+                </div>
+                
+            <div class="div-box">
+                <label asp-for="Text"></label>
+                <textarea asp-for="Text" id="text-editor"></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+                
+                <div class="div-box">
+                    <label asp-for="TitleImagePath"></label>
+                    <input type="file" name="titleImageFile" id="titleImageFile"/>
+                    <div>
+                        <img class="img-block" src="~/images/@Model.TitleImagePath"/>
+                    </div>
+                </div>
+                
+                <div class="div-box">
+                    <label asp-for="MetaTitle"></label>
+                    <input asp-for="MetaTitle"/>
+                    <span asp-validation-for="MetaTitle"></span>
+                </div>
+                
+                <div class="div-box">
+                    <label asp-for="MetaDescription"></label>
+                    <input asp-for="MetaDescription"/>
+                    <span asp-validation-for="MetaDescription"></span>
+                </div>
+                
+            <div class="div-box">
+                <label asp-for="MetaKeywords"></label>
+                <input asp-for="MetaKeywords"/>
+                <span asp-validation-for="MetaKeywords"></span>
+            </div>
+            <input type="submit" value="Сохранить"/>
+           
+        </form>
+    </div>
+</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация CKEditor 5
+            ClassicEditor
+                .create(document.querySelector('#text-editor'), {
+                    toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
+                    heading: {
+                        options: [
+                            { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                            { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                            { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' }
+                        ]
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            // Предпросмотр изображения
+            document.getElementById('titleImageFile').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        let imgPreview = document.querySelector('.img-block');
+                        if (!imgPreview) {
+                            const div = document.createElement('div');
+                            div.className = 'mt-2';
+                            div.innerHTML = '<img class="img-block img-thumbnail" style="max-width: 200px;"/>';
+                            e.target.parentNode.appendChild(div);
+                            imgPreview = div.querySelector('img');
+                        }
+                        imgPreview.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>

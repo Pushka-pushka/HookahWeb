@@ -144,7 +144,7 @@ nav {
 /* Hero Section */
 .hero {
   height: 100vh;
-  background: linear-gradient(var(--overlay-color), var(--overlay-color)), url("../images/bacground.webp") no-repeat center center/cover;
+  background: linear-gradient(var(--overlay-color), var(--overlay-color)), url("../images/hookaback.jpg") no-repeat center center/cover;
   /*background: linear-gradient(var(--overlay-color), var(--overlay-color)), url('wwwroot/images/photo/xx.webp') no-repeat center center/cover;*/
   display: flex;
   align-items: center;
@@ -581,4 +581,9 @@ footer {
   a{
     display: block;
   }
+}
+.img-block{
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
 }

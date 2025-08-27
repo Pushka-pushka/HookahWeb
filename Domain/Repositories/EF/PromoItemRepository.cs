@@ -34,6 +34,7 @@ public class PromoItemRepository:IPromoItemRepository
         {
             _context.Entry(entity).State = EntityState.Modified;
         }
+        _context.SaveChanges();
     }
 
     public void DeletePromoItem(Guid id)

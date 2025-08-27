@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RclubHook.Areas.Admin.ViewModel;
 using RclubHook.Domain.Repositories;
 
 namespace RclubHook.Areas.Admin.Controllers;
@@ -17,7 +18,14 @@ public class HomeController : Controller
     
     public IActionResult Index()
     {
-        return View(_dataManager.ServiceItems.GetServiceItems());
+        var model = new AdminPanelViewModel
+        {
+            ServiceItems = _dataManager.ServiceItems.GetServiceItems(),
+            PromoItems = _dataManager.PromoItems.GetPromoItems(),
+            EventItems = _dataManager.EventItems.GetEventItems()
+        };
+        
+        return View(model);
         
     }
     
