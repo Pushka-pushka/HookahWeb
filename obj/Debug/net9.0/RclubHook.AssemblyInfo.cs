@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RclubHook")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c970dcbfb7049cb86aa1f8af9af6bc2afc999c3b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25315a073cd82c175941b363e823467d71887bdb")]
 [assembly: System.Reflection.AssemblyProductAttribute("RclubHook")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RclubHook")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
